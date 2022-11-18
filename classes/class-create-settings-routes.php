@@ -2,36 +2,46 @@
 /**
  * This file will create Custom Rest API End Points.
  */
-class WP_React_Settings_Rest_Route {
+namespace Israel;
 
-    public function __construct() {
-        add_action( 'rest_api_init', [ $this, 'create_rest_routes' ] );
-    }
+if (! class_exists('WPRKReactSettingsRestRoute')) {
+    class WPRKReactSettingsRestRoute
+    {
 
-    public function create_rest_routes() {
-        register_rest_route( 'wprk/v1', '/settings', [
-            'methods' => 'GET',
-            'callback' => [ $this, 'get_settings' ],
-            'permission_callback' => [ $this, 'get_settings_permission' ]
-        ] );
-    }
-
-    public function get_settings() {
-        global $wpdb;
-
-        $table_name = $wpdb->prefix . 'rank_math_analysis';
-
-        $results = $wpdb->get_results(
-
-            "SELECT * FROM $table_name"
-
-        );
-
-        return rest_ensure_response( json_encode($results) );
-    }
-
-    public function get_settings_permission() {
-        return true;
+        public function __construct()
+        {
+            add_action('rest_api_init', [ $this, 'createRestRoutes' ]);
+        }
+    
+        public function createRestRoutes()
+        {
+            register_rest_route(
+                'wprk/v1',
+                '/settings',
+                [
+                  'methods' => 'GET',
+                  'callback' => [ $this, 'getSettings' ],
+                  'permission_callback' => [ $this, 'getSettingsPermission' ]
+                ]
+            );
+        }
+    
+        public function getSettings()
+        {
+            global $wpdb;
+    
+            $table_name = $wpdb->prefix . 'rank_math_analysis';
+    
+            $results = $wpdb->get_results(
+                "SELECT * FROM $table_name"
+            );
+    
+            return rest_ensure_response(json_encode($results));
+        }
+    
+        public function getSettingsPermission()
+        {
+            return true;
+        }
     }
 }
-new WP_React_Settings_Rest_Route();

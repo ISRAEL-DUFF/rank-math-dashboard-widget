@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from "@wordpress/element";
 import apiFetch from '@wordpress/api-fetch';
 import Chart from './charts';
+import { __ } from '@wordpress/i18n';
 
 const Settings = () => {
 
@@ -57,7 +58,7 @@ const Settings = () => {
                     margin: "50px 5%"
                 }}>
                     <h2>
-                            Graph Widget
+                            { __("Graph Widget", "rank-math-graph-widget") }
                     </h2>
                     <div>
                         <select 
@@ -65,9 +66,9 @@ const Settings = () => {
                                 style={{
                                     'float': 'right'
                                 }}>
-                                    <option value="7">Last 7 days</option>
-                                    <option value="15">Last 15 days</option>
-                                    <option value="30">One Month</option>
+                                    <option value="7">{ __("Last 7 days", "rank-math-graph-widget") }</option>
+                                    <option value="15">{ __("Last 15 days", "rank-math-graph-widget") }</option>
+                                    <option value="30">{ __("One Month", "rank-math-graph-widget") }</option>
                             </select>
                     </div>
                 </div>

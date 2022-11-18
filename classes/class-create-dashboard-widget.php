@@ -2,24 +2,29 @@
 /**
  * This file will create admin menu page.
  */
+namespace Israel;
 
-class WPRK_Create_Dashboard_Widget {
+if (! class_exists('WPRKCreateDashboardWidget')) {
+    class WPRKCreateDashboardWidget
+    {
 
-    public function __construct() {
-        add_action( 'wp_dashboard_setup', [ $this, 'my_dashboard_widget' ] );
+        public function __construct()
+        {
+            add_action('wp_dashboard_setup', [ $this, 'myDashboardWidget' ]);
+        }
+    
+        public function myDashboardWidget()
+        {
+            wp_add_dashboard_widget(
+                'rank_math_graph_dashboard_widget',
+                'Rank Math Graph Dashboard Widget',
+                array($this,'rankMathChartWidget')
+            );
+        }
+    
+        public function rankMathChartWidget()
+        {
+            echo '<div class="wrap"><div id="wprk-admin-app"></div></div>';
+        }
     }
-
-    public function my_dashboard_widget() {
-        wp_add_dashboard_widget(
-            'rank_math_graph_dashboard_widget',
-            'Rank Math Graph Dashboard Widget',
-            array($this,'rank_math_chart_widget')
-        );
-    }
-
-    public function rank_math_chart_widget() {
-        echo '<div class="wrap"><div id="wprk-admin-app"></div></div>';
-    }
-
 }
-new WPRK_Create_Dashboard_Widget();
